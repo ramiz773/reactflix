@@ -1,19 +1,4 @@
-import React, { useState } from "react";
-import Wrapper from "./Wrapper";
-import MovieCard from "./MovieCard";
-import Loader from "./Loader";
-import ErrorMessage from "./ErrorMessage";
-import Pegination from "./Pegination";
-import Slider from "./Slider";
-import { useFetch } from "../Hooks/useFetch";
-
-function Main() {
-  const [page, setPage] = useState(1);
-
-  const [data, loading, error] = useFetch("movie/popular", { page });
-  const { results, total_pages } = data;
-  console.log(data);
-
+function Main({ children }) {
   // const [popMovies, setPopMovies] = useState([])
   // const [totalPages, setTotalPages] = useState(null)
   // const [loading, setLoading] = useState(true)
@@ -45,30 +30,7 @@ function Main() {
   //     fetchData();
   //   }, [page]);
 
-  return (
-    <main>
-      <Slider />
-      <Wrapper>
-        {loading && <Loader />}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        {!error && !loading && (
-          <>
-            <h2 className="sectionTitle">Popular Movies</h2>
-            <div className="gallery">
-              {results?.map((movie) => {
-                return <MovieCard key={movie.id} movie={movie} />;
-              })}
-            </div>
-            <Pegination
-              page={page}
-              setPage={setPage}
-              totalPages={total_pages}
-            />
-          </>
-        )}
-      </Wrapper>
-    </main>
-  );
+  return <main>{children}</main>;
 }
 
 export default Main;

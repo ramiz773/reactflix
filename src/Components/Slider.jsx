@@ -39,7 +39,7 @@ function Slider() {
       <Splide options={splideOptions}>
         {latestMovies?.map((item) => {
           return (
-            <SplideSlide key={item}>
+            <SplideSlide key={item.id}>
               <img
                 src={`https://image.tmdb.org/t/p/w1280/${item.backdrop_path}`}
                 alt={item.title}
