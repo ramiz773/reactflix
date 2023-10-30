@@ -5,6 +5,7 @@ export const AppContext = createContext();
 
 const AppContextWrapper = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const contextValue = { state, dispatch };
 
   return (

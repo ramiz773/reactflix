@@ -12,6 +12,7 @@ export const reducer = (state, { type, payload }) => {
         favorites: state.favorites.filter((item) => item.id !== payload),
       };
     default:
+      return state;
   }
 
   return state;
