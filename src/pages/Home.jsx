@@ -22,7 +22,7 @@ const Home = () => {
           <>
             <h2 className="sectionTitle">Popular Movies</h2>
             <div className="gallery">
-              {results?.map((movie, i) => {
+              {results?.map((movie) => {
                 return <MovieCard key={movie.id} movie={movie} />;
               })}
             </div>

@@ -70,6 +70,49 @@ footer {
   }
 }
 
+.resultBox {
+  position: absolute;
+  z-index: 100;
+  top: 90%;
+  right: 0;
+  width: 100%;
+  max-height: 400px;
+  background: $stone700;
+  overflow: hidden;
+  overflow-y: scroll;
+  border-radius: 0px 0px 5px 5px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .loading {
+    padding: 20px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 10px 10px;
+      border-bottom: 1px solid $stone800;
+      cursor: pointer;
+      &:hover {
+        background: $stone800;
+      }
+      @include flexbox(row, center, flex-start, 10px);
+      img {
+        max-width: 48px;
+      }
+      h4 {
+        color: $stone100;
+        line-height: 1.2;
+        font-size: 16px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
 // section title
 .sectionTitle {
   text-transform: uppercase;
@@ -275,5 +318,38 @@ footer {
         }
       }
     }
+  }
+}
+
+.notFound {
+  padding: 50px 0px;
+  text-align: center;
+  h1 {
+    margin-bottom: 20px;
+    color: $stone100;
+    @include fluidType;
+  }
+  button {
+    background: $amber;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .appHeader {
+    @include flexbox(column, stretch, center, 10px);
+    .siteHeader {
+      @include flexbox(row, stretch, space-between, 20px);
+    }
+  }
+  .searchBox {
+    max-width: 600px;
+  }
+  .moviePage .movieContent {
+    padding-top: 30px;
+    grid-template-columns: 1fr;
   }
 }
