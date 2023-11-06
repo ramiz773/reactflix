@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../Context/appContext";
 
-function Pegination({ page, setPage, totalPages }) {
-  const handlePreviousPage = () => {
-    setPage((previosPage) => previosPage - 1);
-  };
+function Pegination({ page, totalPages }) {
+   const { dispatch } = useContext(AppContext);
 
-  const handleNextpage = () => {
-    setPage((previousPage) => previousPage + 1);
-  };
+   const handlePreviousPage = () => {
+      dispatch({ type: "PREVIOS_PAGE" });
+   };
 
-  return (
-    <div className="pagination">
-      <button disabled={page <= 1} onClick={handlePreviousPage}>
-        previous
-      </button>
-      <p>{`${page} of ${totalPages} `}</p>
-      <button onClick={handleNextpage}>Next page</button>
-    </div>
-  );
+   const handleNextpage = () => {
+      dispatch({ type: "NEXT_PAGE" });
+   };
+
+   return (
+      <div className='pagination'>
+         <button disabled={page <= 1} onClick={handlePreviousPage}>
+            previous
+         </button>
+         <p>{`${page} of ${totalPages} `}</p>
+         <button onClick={handleNextpage}>Next page</button>
+      </div>
+   );
 }
 
 export default Pegination;

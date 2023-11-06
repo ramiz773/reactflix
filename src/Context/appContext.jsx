@@ -1,16 +1,23 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { reducer, initialState } from "../Reducer/appReducer";
+import { json } from "react-router-dom";
 
 export const AppContext = createContext();
 
 const AppContextWrapper = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+   let localState = localStorage.getItem("AppState");
+   let initialStateValue = localStorage ? JSON.parse(localState) : initialState;
 
-  const contextValue = { state, dispatch };
+   const [state, dispatch] = useReducer(reducer, initialStateValue);
 
-  return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-  );
+   const contextValue = { state, dispatch };
+   useEffect(() => {
+      localStorage.setItem("AppState", JSON.stringify(state));
+   }, [state]);
+
+   return (
+      <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+   );
 };
 
 export default AppContextWrapper;

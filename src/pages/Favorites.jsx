@@ -9,7 +9,7 @@ const Favorites = () => {
   console.log(state.favorites);
   return (
     <Wrapper>
-      <div className="sectionTitle">Favorites</div>
+      <div className="sectionTitle">Favorites Movies</div>
       <div className="gallery">
         {state?.favorites.map((movie) => {
           return <MovieCard key={movie.id} movie={movie} />;

@@ -7,35 +7,34 @@ import { useFetch } from "../Hooks/useFetch";
 import MovieCard from "../Components/MovieCard";
 import Pegination from "../Components/Pegination";
 import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../Context/appContext";
 const Home = () => {
-  const [page, setPage] = useState(1);
-
-  const [data, loading, error] = useFetch("movie/popular", { page });
-  const { results, total_pages } = data;
-  return (
-    <>
-      <Slider />
-      <Wrapper>
-        {loading && <Loader />}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        {!error && !loading && (
-          <>
-            <h2 className="sectionTitle">Popular Movies</h2>
-            <div className="gallery">
-              {results?.map((movie) => {
-                return <MovieCard key={movie.id} movie={movie} />;
-              })}
-            </div>
-            <Pegination
-              page={page}
-              setPage={setPage}
-              totalPages={total_pages}
-            />
-          </>
-        )}
-      </Wrapper>
-    </>
-  );
+   const {
+      state: { page },
+   } = useContext(AppContext);
+   const [data, loading, error] = useFetch("movie/popular", { page });
+   const { results, total_pages } = data;
+   return (
+      <>
+         <Slider />
+         <Wrapper>
+            {loading && <Loader />}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {!error && !loading && (
+               <>
+                  <h2 className='sectionTitle'>Popular Movies</h2>
+                  <div className='gallery'>
+                     {results?.map((movie) => {
+                        return <MovieCard key={movie.id} movie={movie} />;
+                     })}
+                  </div>
+                  <Pegination page={page} totalPages={total_pages} />
+               </>
+            )}
+         </Wrapper>
+      </>
+   );
 };
 
 export default Home;
